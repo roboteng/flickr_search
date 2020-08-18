@@ -6,6 +6,7 @@ PreferredSizeWidget flickrAppBar(BuildContext context, String title) => AppBar(
       title: Text(title),
       actions: <Widget>[
         IconButton(
+          tooltip: 'Search',
           icon: Icon(Icons.search),
           onPressed: () {
             showSearch(context: context, delegate: PhotoSearch());

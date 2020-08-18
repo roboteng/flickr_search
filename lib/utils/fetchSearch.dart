@@ -9,7 +9,7 @@ Future<http.Response> fetchSearch(String query) async {
       'format': 'json',
       'api_key': apiKey,
       'tags': query,
-      'extras': 'o_dims, description, tags, path_alias',
+      'extras': 'o_dims, description, tags, path_alias, url_o',
     },
   );
   print(req);

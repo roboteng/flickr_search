@@ -13,6 +13,7 @@ class Photo {
   final String height;
   final String tags;
   final String desc;
+  final String urlO;
 
   Photo({
     this.id,
@@ -28,6 +29,7 @@ class Photo {
     this.height,
     this.tags,
     this.desc,
+    this.urlO,
   });
 
   factory Photo.fromJSON(Map<String, dynamic> json) {
@@ -50,10 +52,11 @@ class Photo {
       height: json[HEIGHT],
       desc: json['description']['_content'] ?? '',
       tags: json['tags'],
+      urlO: json['url_o'],
     );
   }
 
-  bool get hasSize => (width != null) && (height != null);
+  bool get hasSize => (width == null) || (height == null);
 
   String url(String size) =>
       'https://farm$farm.staticflickr.com/$server/${id}_${secret}_$size.jpg';

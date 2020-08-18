@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flickr_search/models/photo.dart';
+import 'package:flickr_search/utils/launcher.dart';
 import 'package:flickr_search/widgets/flickrAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class ImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: flickrAppBar(context, photo.title),
+      appBar: flickrAppBar(context, photo.title ?? 'Untitled'),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,11 +31,16 @@ class ImagePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(photo.desc),
+                  Text(photo.desc ?? ''),
                   DataRow(
                     title: Text('URL'),
-                    value: Text(
-                      photo.url('o'),
+                    value: FlatButton(
+                      child: Text(
+                        photo.urlO ?? photo.url('o'),
+                      ),
+                      onPressed: () {
+                        launchInBrowser(photo.urlO);
+                      },
                     ),
                   ),
                   photo.hasSize
@@ -46,10 +52,6 @@ class ImagePage extends StatelessWidget {
                   DataRow(
                     title: Text('Tags'),
                     value: Text(photo.tags ?? 'None'),
-                  ),
-                  DataRow(
-                    title: Text(''),
-                    value: Text(''),
                   ),
                 ],
               ),
